@@ -6,24 +6,17 @@ const store = useCharacterStore()
 
 const route = useRoute()
 
-store.getCharacter(route.params.id as string)
+store.getCharacterByName(route.params.id as string)
 </script>
 
 <template>
   <div class="container">
     <div class="list">
-      <div v-for="character in store.characters" :key="character.name">
-        <div v-if="character.name" class="list">
-          <p>Name: {{ character.name }}</p>
-          <div v-for="stat in character.stats" :key="stat">
-            <p>HP: {{ stat }}</p>
-            <p>Attack: {{ stat }}</p>
-            <p>Defense: {{ stat }}</p>
-            <p>Special attack: {{ stat }}</p>
-            <p>Special defense: {{ stat }}</p>
-            <p>Speed: {{ stat }}</p>
-          </div>
-        </div>
+      <div class="list">
+        <p>Name: {{ store.character.name }}</p>
+        <p v-for="item in store.character.stats" :key="item.stat.name">
+          {{ item.stat.name }}: {{ item.base_stat }}
+        </p>
       </div>
     </div>
   </div>

@@ -7,13 +7,18 @@ const URL = 'https://pokeapi.co/api/v2/'
 interface CharactersProps {
   name: string
   url: string
-  stats?: {
-    base_stat: number
-  }
+  stats: {
+    base_stat: number,
+    stat: {
+      name: string
+    }
+  }[]
 }
 
 export const useCharacterStore = defineStore('character', () => {
   const characters = ref<CharactersProps[]>([])
+
+  const character = ref<CharactersProps>({} as CharactersProps)
 
   async function getCharacters() {
     try {
@@ -39,5 +44,19 @@ export const useCharacterStore = defineStore('character', () => {
     }
   }
 
-  return { characters, getCharacters, getCharacter }
+  async function getCharacterByName(value: string) {
+    try {
+      if (value === '') {
+        getCharacters()
+      } else {
+        const pokemon = await axios.get(URL + 'pokemon/' + value)
+        character.value = pokemon.data
+      }
+    }
+    catch (error) {
+      character.value = {} as CharactersProps
+    }
+  }
+
+  return { character, characters, getCharacters, getCharacter, getCharacterByName }
 })
