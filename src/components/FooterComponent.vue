@@ -15,7 +15,7 @@
   margin-top: 1rem;
   background-color: #333;
   color: #fff;
-  
+
   footer {
     max-width: 1200px;
     margin: 0 auto;

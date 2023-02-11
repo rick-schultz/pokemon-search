@@ -5,11 +5,9 @@ import { RouterLink } from 'vue-router'
 <template>
   <div class="container">
     <nav>
-      <RouterLink to="/"><h1>Pokemon Search</h1></RouterLink>
-      <div>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </div>
+      <RouterLink to="/">
+        <h1>Pokemon Search</h1>
+      </RouterLink>
     </nav>
   </div>
 </template>
@@ -18,19 +16,14 @@ import { RouterLink } from 'vue-router'
 .container {
   background-color: #333;
   color: #fff;
-  
+
   nav {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     padding: 1rem;
-
-    div {
-      display: flex;
-      gap: 2rem;
-    }
   }
 }
 </style>
