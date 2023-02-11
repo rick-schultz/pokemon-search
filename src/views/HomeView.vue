@@ -2,42 +2,59 @@
 import { ref } from 'vue'
 import { useCharacterStore } from '@/stores/counter';
 
+const input = ref()
 const store = useCharacterStore()
 
 store.getCharacters()
-store.getCharacterById(132)
-store.getCharacterByName('ditto')
 
-const clearValue = () => {
+const clearCharacters = () => {
   input.value = ''
+  store.getCharacters()
 }
-
-const input = ref('Something')
-
 </script>
 
 <template>
-  <div class="main">
-    <input type="text" id="searchBar" v-model="input" placeholder="Search for a character">
-    <button @click="clearValue()">Clear</button>
-  </div>
-  <div
-  v-for="character in store.characters"
-  :key="character.name"
-  >
-  <p>{{ character.name }}</p>
-  <a>{{ character.url }}</a>
+  <div class="container">
+    <div class="main">
+      <form>
+        <input type="text" id="searchBar" v-model="input" placeholder="Search for a character" @keyup.enter="store.getCharacter(input)">
+        <button @click.prevent="store.getCharacter(input)">Search</button>
+        <button @click.prevent="clearCharacters()">Clear</button>
+      </form>
+    </div>
+    <div v-if="store.characters.length === 0">
+      <p>No characters found</p>
+    </div>
+    <div
+    class="list"
+    v-for="character in store.characters"
+    :key="character.name"
+    >
+    <p>{{ character.name }}</p>
+    <a>{{ character.url }}</a>
+    </div>
   </div>
 </template>
 
 
 <style lang="scss" scoped>
-.main {
+.container {
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  gap: 1rem;
-  margin-top: 2rem;
+  align-items: center;
+  
+  .main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  .list {
+    margin-bottom: 1rem;
+  }
 }
 </style>
