@@ -7,6 +7,9 @@ const URL = 'https://pokeapi.co/api/v2/'
 interface CharactersProps {
   name: string
   url: string
+  stats?: {
+    base_stat: number
+  }
 }
 
 export const useCharacterStore = defineStore('character', () => {
