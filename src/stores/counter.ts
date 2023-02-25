@@ -13,6 +13,13 @@ interface CharactersProps {
       name: string
     }
   }[]
+  sprites: {
+    other: {
+      dream_world: {
+        front_default: string
+      }
+    }
+  }
 }
 
 export const useCharacterStore = defineStore('character', () => {
